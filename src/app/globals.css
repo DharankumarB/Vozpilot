@@ -1,0 +1,198 @@
+@import "tailwindcss";
+
+/* =============================================================================
+   VozPilot design system — Premium + Dark + Modern + Intelligent + Minimal
+   by VozLook Studios
+   ========================================================================== */
+
+@theme {
+  --color-ink-950: #07070a;
+  --color-ink-900: #0b0b10;
+  --color-ink-850: #101016;
+  --color-ink-800: #15151d;
+  --color-ink-700: #1c1c26;
+  --color-ink-600: #262632;
+  --color-ink-500: #34343f;
+
+  --color-violet-accent: #7c5cff;
+  --color-violet-soft: #a78bfa;
+  --color-violet-deep: #5b3df0;
+
+  --color-gold-accent: #e3b25c;
+  --color-gold-soft: #f0cd8d;
+
+  --color-text-primary: #f5f5f7;
+  --color-text-secondary: #a8a8b3;
+  --color-text-muted: #75757f;
+
+  --color-success: #3ecf8e;
+  --color-warning: #e8b45a;
+  --color-danger: #f2555a;
+  --color-info: #5aa9f2;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Roboto Mono", Menlo, monospace;
+
+  --radius-card: 14px;
+  --radius-control: 10px;
+
+  --shadow-elevated: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 18px 40px -24px rgb(0 0 0 / 0.85);
+}
+
+:root {
+  color-scheme: dark;
+  --vp-border: rgb(255 255 255 / 0.07);
+  --vp-border-strong: rgb(255 255 255 / 0.12);
+  --vp-ring: rgb(124 92 255 / 0.55);
+}
+
+* {
+  border-color: var(--vp-border);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-ink-950);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+/* Never allow horizontal overflow on any viewport. */
+#__next,
+main {
+  min-width: 0;
+}
+
+::selection {
+  background: rgb(124 92 255 / 0.35);
+}
+
+/* Focus visibility — required for keyboard accessibility. */
+:focus-visible {
+  outline: 2px solid var(--color-violet-soft);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-ink-600) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--color-ink-600);
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@utility vp-card {
+  background-color: color-mix(in srgb, var(--color-ink-850) 92%, transparent);
+  border: 1px solid var(--vp-border);
+  border-radius: var(--radius-card);
+}
+
+@utility vp-panel {
+  background-color: color-mix(in srgb, var(--color-ink-900) 96%, transparent);
+  border: 1px solid var(--vp-border);
+}
+
+@utility vp-input {
+  width: 100%;
+  background-color: var(--color-ink-900);
+  border: 1px solid var(--vp-border-strong);
+  border-radius: var(--radius-control);
+  padding: 0.55rem 0.75rem;
+  font-size: 0.9rem;
+  color: var(--color-text-primary);
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+@utility vp-input {
+  &::placeholder {
+    color: var(--color-text-muted);
+  }
+  &:focus {
+    outline: none;
+    border-color: var(--color-violet-accent);
+    box-shadow: 0 0 0 3px rgb(124 92 255 / 0.18);
+  }
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+
+@utility vp-scroll-area {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Subtle motion — deliberately restrained. */
+@keyframes vp-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes vp-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes vp-pulse-soft {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@utility vp-animate-in {
+  animation: vp-fade-up 220ms ease-out both;
+}
+
+@utility vp-animate-fade {
+  animation: vp-fade-in 180ms ease-out both;
+}
+
+@utility vp-skeleton {
+  animation: vp-pulse-soft 1.6s ease-in-out infinite;
+  background: linear-gradient(90deg, var(--color-ink-800), var(--color-ink-700), var(--color-ink-800));
+  background-size: 200% 100%;
+  border-radius: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
